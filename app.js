@@ -214,6 +214,33 @@ app.put("/users/:id", autenticarToken, upload.single("foto"), async (req, res) =
   }
 });
 
+// 🔹 Excluir usuário (somente admin, não pode excluir a si mesmo)
+app.delete("/users/:id", autenticarToken, async (req, res) => {
+  const { id } = req.params;
+
+  if (req.user.perfil !== "admin") {
+    return res.status(403).json({ erro: "Apenas administradores podem excluir usuários" });
+  }
+
+  // Impede exclusão do próprio admin logado
+  if (parseInt(id) === req.user.id) {
+    return res.status(400).json({ erro: "Você não pode excluir seu próprio usuário" });
+  }
+
+  try {
+    const result = await pool.query("DELETE FROM users WHERE id = $1 RETURNING id", [id]);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ erro: "Usuário não encontrado" });
+    }
+
+    res.json({ mensagem: "Usuário excluído com sucesso" });
+  } catch (err) {
+    console.error("❌ Erro ao excluir usuário:", err);
+    res.status(500).json({ erro: "Erro ao excluir usuário", detalhe: err.message });
+  }
+});
+
 // GET /users/:id - retorna um usuário específico
 app.get("/users/:id", autenticarToken, async (req, res) => {
   const { id } = req.params;

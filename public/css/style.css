@@ -36,8 +36,8 @@ footer {
 }
 
 header img.logo {
-  width: 120px;       /* largura máxima do logo */
-  max-height: 80px;   /* altura máxima para não quebrar layout */
+  width: 120px;       
+  max-height: 80px;   
   height: auto;
   object-fit: contain;
 }
@@ -60,13 +60,25 @@ header h1 {
 /* ==============================
    BOTÕES PADRÃO
 ============================== */
+button {
+  font-family: inherit;
+  font-size: 0.9em;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Botões principais */
 .btn-verde {
   background: #008000;
   color: #fff;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 5px;
   font-weight: bold;
 }
 
@@ -75,25 +87,17 @@ header h1 {
 }
 
 .btn-vermelho {
-  background: #e60000;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 5px;
+  background-color: #c0392b;
+  color: white;
 }
 
 .btn-vermelho:hover {
-  background: #cc0000;
+  background-color: #e74c3c;
 }
 
 .btn-azul {
   background: #004080;
   color: #fff;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 5px;
 }
 
 .btn-azul:hover {
@@ -187,18 +191,41 @@ tbody tr:hover {
   cursor: pointer;
 }
 
-.editarBtn {
-  background: #008000;
-  color: #fff;
-  border: none;
-  padding: 4px 10px;
-  border-radius: 4px;
-  cursor: pointer;
+/* ==============================
+   BOTÕES DE AÇÃO (EDITAR / EXCLUIR)
+============================== */
+.editarBtn, .excluirBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
   font-size: 0.85em;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.editarBtn {
+  background-color: #4CAF50;
+  color: white;
 }
 
 .editarBtn:hover {
-  background: #006600;
+  background-color: #45a049;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.excluirBtn {
+  background-color: #f44336;
+  color: white;
+}
+
+.excluirBtn:hover {
+  background-color: #e53935;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 /* ==============================
@@ -215,9 +242,7 @@ tbody tr:hover {
 .paginacao button {
   background: #004080;
   color: #fff;
-  border: none;
   padding: 5px 12px;
-  cursor: pointer;
   border-radius: 4px;
 }
 
@@ -241,7 +266,8 @@ tbody tr:hover {
 .modal-foto img {
   max-width: 90%;
   max-height: 90%;
-  border-radius: 8px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
 /* ==============================

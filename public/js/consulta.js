@@ -13,27 +13,29 @@ document.addEventListener("DOMContentLoaded", () => {
   let usuarios = [];
   let paginaAtual = 1;
   const itensPorPagina = 5;
+  const isAdmin = user?.perfil === "admin";
 
-  // 🚪 Verifica login
   if (!user || !user.token) {
     window.location.href = "index.html";
     return;
   }
 
+  console.log("👤 Usuário logado:", user);
+
   userNameEl.textContent = `${user.nome_completo || user.email} (${user.perfil})`;
 
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("user");
-    localStorage.removeItem("editUserId");
     window.location.href = "index.html";
   });
 
-  if (user.perfil !== "admin") {
+  if (!isAdmin) {
     adminFiltro.style.display = "none";
     paginacaoContainer.style.display = "none";
   }
 
   buscaInput.addEventListener("input", () => {
+    paginaAtual = 1;
     renderTabela(filtrarUsuarios());
   });
 
@@ -59,25 +61,18 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (!resp.ok) throw new Error("Erro ao buscar usuários.");
-
       usuarios = await resp.json();
-
-      // Certifica que endereco é objeto
-      usuarios = usuarios.map(u => ({
-        ...u,
-        endereco: typeof u.endereco === "string" ? JSON.parse(u.endereco) : u.endereco
-      }));
-
+      console.log("📦 Usuários carregados:", usuarios);
       renderTabela(usuarios);
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error("❌ Erro ao carregar usuários:", error);
       alert("Erro ao carregar usuários.");
     }
   }
 
   function filtrarUsuarios() {
     const termo = buscaInput.value.toLowerCase();
-    return usuarios.filter(u => u.nome_completo?.toLowerCase().includes(termo));
+    return usuarios.filter((u) => u.nome_completo?.toLowerCase().includes(termo));
   }
 
   function formatarData(dataISO) {
@@ -91,53 +86,85 @@ document.addEventListener("DOMContentLoaded", () => {
     tabelaBody.innerHTML = "";
     let pagina = lista;
 
-    if (user.perfil === "admin") {
+    if (isAdmin) {
       const inicio = (paginaAtual - 1) * itensPorPagina;
       const fim = inicio + itensPorPagina;
       pagina = lista.slice(inicio, fim);
     }
 
     if (pagina.length === 0) {
-      tabelaBody.innerHTML = `<tr><td colspan="9" style="text-align:center;">Nenhum usuário encontrado</td></tr>`;
-      pageInfo.textContent = user.perfil === "admin" ? `Página 0 de 0` : "";
+      tabelaBody.innerHTML = `<tr><td colspan="12" style="text-align:center;">Nenhum usuário encontrado</td></tr>`;
+      pageInfo.textContent = isAdmin ? "Página 0 de 0" : "";
       return;
     }
+
+    console.log("🎨 Renderizando tabela. Admin:", isAdmin);
 
     for (const u of pagina) {
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${u.id}</td>
         <td>${u.nome_completo || ""}</td>
-        <td>${u.email || ""}</td>
+        <td>${u.email}</td>
         <td>${formatarData(u.data_nascimento)}</td>
+        <td>${u.endereco?.cep || ""}</td>
         <td>${u.endereco?.logradouro || ""}</td>
         <td>${u.endereco?.bairro || ""}</td>
         <td>${u.endereco?.cidade || ""}</td>
         <td>${u.endereco?.estado || ""}</td>
         <td>${u.cunhado || ""}</td>
-        <td>${u.foto_url ? `<img src="${u.foto_url}" class="foto-thumb">` : "—"}</td>
-        <td><button class="editarBtn btn-verde" data-id="${u.id}">Editar</button></td>
+        <td>${u.foto_url ? `<img src="${u.foto_url}" alt="foto" class="foto-thumb">` : "—"}</td>
+        <td>
+          <button class="editarBtn" data-id="${u.id}">✏️ Editar</button>
+          ${isAdmin ? `<button class="excluirBtn" data-id="${u.id}">🗑️ Excluir</button>` : ""}
+        </td>
       `;
       tabelaBody.appendChild(tr);
     }
 
-    if (user.perfil === "admin") {
+    if (isAdmin) {
       const totalPaginas = Math.ceil(lista.length / itensPorPagina);
       pageInfo.textContent = `Página ${paginaAtual} de ${totalPaginas}`;
-    } else {
-      pageInfo.textContent = "";
     }
 
-    // Evento editar
-    document.querySelectorAll(".editarBtn").forEach(btn => {
+    document.querySelectorAll(".editarBtn").forEach((btn) => {
       btn.addEventListener("click", () => {
-        const id = btn.dataset.id;
-        window.location.href = `edicao.html?id=${id}`;
+        window.location.href = `edicao.html?id=${btn.dataset.id}`;
       });
     });
 
-    // Evento preview foto
-    document.querySelectorAll(".foto-thumb").forEach(img => {
+    document.querySelectorAll(".excluirBtn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const id = parseInt(btn.dataset.id);
+        if (id === user.id) {
+          alert("⚠️ Você não pode excluir seu próprio usuário!");
+          return;
+        }
+
+        if (!confirm("Tem certeza que deseja excluir este usuário?")) return;
+
+        try {
+          const resp = await fetch(`/users/${id}`, {
+            method: "DELETE",
+            headers: { Authorization: "Bearer " + user.token },
+          });
+
+          if (!resp.ok) {
+            const err = await resp.json();
+            alert("Erro ao excluir: " + (err.erro || "Falha desconhecida"));
+            return;
+          }
+
+          alert("✅ Usuário excluído com sucesso!");
+          carregarUsuarios();
+        } catch (err) {
+          console.error("Erro ao excluir:", err);
+          alert("Erro ao excluir usuário.");
+        }
+      });
+    });
+
+    document.querySelectorAll(".foto-thumb").forEach((img) => {
       img.addEventListener("click", () => {
         const modal = document.createElement("div");
         modal.className = "modal-foto";

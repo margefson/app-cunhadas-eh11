@@ -28,6 +28,42 @@
     </div>
   </main>
 
-  <script src="js/login.js"></script>
+<footer>
+    <p>© 2025 - Sistema de Usuários</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("loginForm");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const email = document.getElementById("email").value;
+        const senha = document.getElementById("senha").value;
+        console.log("🔑 Tentativa de login:", email);
+
+        try {
+          const resp = await fetch("/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, senha }),
+          });
+
+          const data = await resp.json();
+          if (!resp.ok) {
+            alert(data.erro || "Falha no login");
+            console.error("❌ Erro login:", data);
+            return;
+          }
+
+          console.log("✅ Login realizado:", data);
+          localStorage.setItem("user", JSON.stringify(data));
+          window.location.href = "consulta.html";
+        } catch (err) {
+          console.error("Erro ao logar:", err);
+          alert("Erro ao logar. Veja o console.");
+        }
+      });
+    });
+  </script>
 </body>
 </html>
