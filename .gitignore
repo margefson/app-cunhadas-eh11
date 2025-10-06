@@ -1,0 +1,92 @@
+# ==========================================
+# Node.js / Express / AWS S3 / PostgreSQL
+# Projeto: app-cunhadas-eh11
+# ==========================================
+
+# Dependências
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+.pnpm-debug.log
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build e cache
+dist/
+build/
+.cache/
+.tmp/
+coverage/
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+*.log.*
+log.txt
+debug.log
+
+# Uploads temporários
+uploads/
+tmp/
+*.bak
+*.old
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# IDEs e editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Banco de dados local
+*.sqlite
+*.db
+*.db-journal
+pgdata/
+data/
+dump.sql
+
+# Arquivos de backup e exportações
+*.csv
+*.xlsx
+*.ods
+*.sql
+*.tar.gz
+*.zip
+
+# Arquivos gerados
+*.pid
+*.seed
+*.pid.lock
+
+# Testes
+jest.config.js
+__tests__/
+coverage/
+*.test.js
+*.spec.js
+
+# Public/uploads gerados
+public/uploads/
+public/tmp/
+
+# ==========================================
+# Fim do arquivo
+# ==========================================

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro - Cunhadas</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <img src="img/logo.jpg" alt="Logo" class="logo">
+    <h1>Cadastro de Usuário</h1>
+  </header>
+
+  <main>
+    <form id="cadastroForm" enctype="multipart/form-data">
+      <label for="nome_completo">Nome Completo:</label>
+      <input type="text" id="nome_completo" name="nome_completo" autocomplete="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" autocomplete="email" required>
+
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" name="senha" autocomplete="new-password" required>
+
+      <label for="data_nascimento">Data de Nascimento:</label>
+      <input type="date" id="data_nascimento" name="data_nascimento" autocomplete="bday" required>
+
+      <label for="cep">CEP:</label>
+      <input type="text" id="cep" name="cep" autocomplete="postal-code" required>
+
+      <label for="logradouro">Logradouro:</label>
+      <input type="text" id="logradouro" name="logradouro" autocomplete="street-address">
+
+      <label for="numero">Número:</label>
+      <input type="text" id="numero" name="numero">
+
+      <label for="complemento">Complemento:</label>
+      <input type="text" id="complemento" name="complemento">
+
+      <label for="bairro">Bairro:</label>
+      <input type="text" id="bairro" name="bairro">
+
+      <label for="cidade">Cidade:</label>
+      <input type="text" id="cidade" name="cidade" autocomplete="address-level2">
+
+      <label for="estado">Estado:</label>
+      <input type="text" id="estado" name="estado" autocomplete="address-level1">
+
+      <label for="cunhado">Cunhado:</label>
+      <input type="text" id="cunhado" name="cunhado">
+
+      <label for="foto">Foto:</label>
+      <input type="file" id="foto" name="foto" accept="image/*">
+      <div class="foto-preview">
+        <img id="fotoPreview" src="" alt="Pré-visualização" style="display:none;">
+      </div>
+      <div id="mensagem" style="margin-top:10px; color:red;"></div>
+      <button type="submit" class="btn-verde">Cadastrar</button>
+      <button type="button" id="btnVoltar" class="btn-azul">Voltar</button>
+    </form>
+  </main>
+
+  <script src="js/cadastro.js"></script>
+</body>
+</html>

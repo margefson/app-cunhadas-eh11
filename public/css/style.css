@@ -1,0 +1,262 @@
+/* ==============================
+   RESET E PADRÕES
+============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+  color: #333;
+  line-height: 1.5;
+}
+
+header, footer {
+  background: #004080;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9em;
+}
+
+/* ==============================
+   LOGO E HEADER
+============================== */
+.header-container, header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+header img.logo {
+  width: 120px;       /* largura máxima do logo */
+  max-height: 80px;   /* altura máxima para não quebrar layout */
+  height: auto;
+  object-fit: contain;
+}
+
+header h1 {
+  font-size: 1.5em;
+  margin-left: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-info span {
+  font-weight: bold;
+}
+
+/* ==============================
+   BOTÕES PADRÃO
+============================== */
+.btn-verde {
+  background: #008000;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.btn-verde:hover {
+  background: #006600;
+}
+
+.btn-vermelho {
+  background: #e60000;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn-vermelho:hover {
+  background: #cc0000;
+}
+
+.btn-azul {
+  background: #004080;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn-azul:hover {
+  background: #003366;
+}
+
+/* ==============================
+   FORMULÁRIOS
+============================== */
+main {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="date"],
+form input[type="file"] {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-top: 4px;
+}
+
+/* Preview de foto */
+.foto-preview {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.foto-preview img {
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  object-fit: cover;
+}
+
+/* ==============================
+   TABELAS
+============================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+thead {
+  background: #004080;
+  color: #fff;
+}
+
+th, td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #ddd;
+  font-size: 0.9em;
+}
+
+tbody tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+tbody tr:hover {
+  background: #e6f0ff;
+}
+
+.foto-thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.editarBtn {
+  background: #008000;
+  color: #fff;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85em;
+}
+
+.editarBtn:hover {
+  background: #006600;
+}
+
+/* ==============================
+   PAGINAÇÃO
+============================== */
+.paginacao {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.paginacao button {
+  background: #004080;
+  color: #fff;
+  border: none;
+  padding: 5px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.paginacao button:hover {
+  background: #003366;
+}
+
+/* ==============================
+   MODAL DE FOTO
+============================== */
+.modal-foto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.8);
+  z-index: 1000;
+}
+
+.modal-foto img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+}
+
+/* ==============================
+   LINKS E OUTROS
+============================== */
+.link-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.link-container a {
+  text-decoration: none;
+  color: #004080;
+}
+
+.link-container a:hover {
+  text-decoration: underline;
+}

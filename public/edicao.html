@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Edição de Usuário</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <img src="img/logo.jpg" alt="Logo" class="logo">
+      <h1>Editar Usuário</h1>
+      <div class="user-info">
+        <span id="userName"></span>
+        <button id="btnSair" class="btn-vermelho">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <form id="edicaoForm" enctype="multipart/form-data">
+      <label for="nome">Nome completo:</label>
+      <input type="text" id="nome" name="nome_completo" autocomplete="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" autocomplete="email" required disabled>
+
+      <label for="data_nascimento">Data de Nascimento:</label>
+      <input type="date" id="data_nascimento" name="data_nascimento" required>
+
+      <label for="cep">CEP:</label>
+      <input type="text" id="cep" name="cep" autocomplete="postal-code">
+
+      <label for="logradouro">Logradouro:</label>
+      <input type="text" id="logradouro" name="logradouro" autocomplete="street-address">
+
+      <label for="bairro">Bairro:</label>
+      <input type="text" id="bairro" name="bairro" autocomplete="address-level2">
+
+      <label for="cidade">Cidade:</label>
+      <input type="text" id="cidade" name="cidade" autocomplete="address-level2">
+
+      <label for="estado">Estado:</label>
+      <input type="text" id="estado" name="estado" autocomplete="address-level1">
+
+      <label for="numero">Número:</label>
+      <input type="text" id="numero" name="numero">
+
+      <label for="complemento">Complemento:</label>
+      <input type="text" id="complemento" name="complemento">
+
+      <label for="cunhado">Cunhado:</label>
+      <input type="text" id="cunhado" name="cunhado">
+
+      <label for="foto">Foto:</label>
+      <input type="file" id="foto" name="foto" accept="image/*">
+      <div class="foto-preview">
+        <img id="fotoPreview" src="" style="display:none;">
+      </div>
+
+      <button type="submit" class="btn-verde">Atualizar</button>
+      <button type="button" id="btnVoltar" class="btn-azul">Voltar</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>© 2025 - Sistema de Usuários</p>
+  </footer>
+
+  <script src="js/edicao.js"></script>
+</body>
+</html>
