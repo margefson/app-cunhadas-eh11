@@ -3,70 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <title>Edição de Usuário</title>
-  <link rel="stylesheet" href="css/style.css">
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    crossorigin="anonymous"
+  />
 </head>
 <body>
-  <header>
-    <div class="header-container">
-      <img src="img/logo.jpg" alt="Logo" class="logo">
-      <h1>Editar Usuário</h1>
-      <div class="user-info">
+  <!-- Header -->
+  <header class="bg-primary text-white p-3 mb-4">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <img src="img/logo.jpg" alt="Logo" class="img-fluid me-2" style="max-height:60px;">
+        <h1 class="h4 mb-0">Editar Usuário</h1>
+      </div>
+      <div class="user-info d-flex align-items-center gap-2">
         <span id="userName"></span>
-        <button id="btnSair" class="btn-vermelho">Sair</button>
+        <button id="btnSair" class="btn btn-danger btn-sm">Sair</button>
       </div>
     </div>
   </header>
 
-  <main>
-    <form id="edicaoForm" enctype="multipart/form-data">
-      <label for="nome">Nome completo:</label>
-      <input type="text" id="nome" name="nome_completo" autocomplete="name" required>
+  <!-- Main -->
+  <main class="container mb-5">
+    <form id="edicaoForm" enctype="multipart/form-data" class="row g-3">
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" autocomplete="email" required disabled>
-
-      <label for="data_nascimento">Data de Nascimento:</label>
-      <input type="date" id="data_nascimento" name="data_nascimento" required>
-
-      <label for="cep">CEP:</label>
-      <input type="text" id="cep" name="cep" autocomplete="postal-code">
-
-      <label for="logradouro">Logradouro:</label>
-      <input type="text" id="logradouro" name="logradouro" autocomplete="street-address">
-
-      <label for="bairro">Bairro:</label>
-      <input type="text" id="bairro" name="bairro" autocomplete="address-level2">
-
-      <label for="cidade">Cidade:</label>
-      <input type="text" id="cidade" name="cidade" autocomplete="address-level2">
-
-      <label for="estado">Estado:</label>
-      <input type="text" id="estado" name="estado" autocomplete="address-level1">
-
-      <label for="numero">Número:</label>
-      <input type="text" id="numero" name="numero">
-
-      <label for="complemento">Complemento:</label>
-      <input type="text" id="complemento" name="complemento">
-
-      <label for="cunhado">Cunhado:</label>
-      <input type="text" id="cunhado" name="cunhado">
-
-      <label for="foto">Foto:</label>
-      <input type="file" id="foto" name="foto" accept="image/*">
-      <div class="foto-preview">
-        <img id="fotoPreview" src="" style="display:none;">
+      <!-- Seção Dados Pessoais -->
+      <div class="border rounded p-3 mb-4">
+        <h5 class="mb-3">Dados Pessoais</h5>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="nome" class="form-label">Nome completo</label>
+            <input type="text" id="nome" name="nome_completo" class="form-control" autocomplete="name" required>
+          </div>
+          <div class="col-md-6">
+            <label for="foto" class="form-label">Foto</label>
+            <input type="file" id="foto" name="foto" class="form-control" accept="image/*">
+            <div class="mt-2 foto-preview">
+              <img id="fotoPreview" src="" class="img-thumbnail" style="display:none; max-width:150px;">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-control" autocomplete="email" required disabled>
+          </div>
+          <div class="col-md-6">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" id="senha" name="senha" class="form-control" autocomplete="new-password">
+          </div>
+          <div class="col-md-6">
+            <label for="data_nascimento" class="form-label">Data de Nascimento</label>
+            <input type="date" id="data_nascimento" name="data_nascimento" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label for="cunhado" class="form-label">Cunhado</label>
+            <input type="text" id="cunhado" name="cunhado" class="form-control">
+          </div>
+        </div>
       </div>
 
-      <button type="submit" class="btn-verde">Atualizar</button>
-      <button type="button" id="btnVoltar" class="btn-azul">Voltar</button>
+      <!-- Seção Endereço -->
+      <div class="border rounded p-3 mb-4">
+        <h5 class="mb-3">Endereço</h5>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label for="cep" class="form-label">CEP</label>
+            <input type="text" id="cep" name="cep" class="form-control">
+          </div>
+          <div class="col-md-8">
+            <label for="logradouro" class="form-label">Logradouro</label>
+            <input type="text" id="logradouro" name="logradouro" class="form-control">
+          </div>
+          <div class="col-md-2">
+            <label for="numero" class="form-label">Número</label>
+            <input type="text" id="numero" name="numero" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label for="complemento" class="form-label">Complemento</label>
+            <input type="text" id="complemento" name="complemento" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label for="bairro" class="form-label">Bairro</label>
+            <input type="text" id="bairro" name="bairro" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label for="cidade" class="form-label">Cidade</label>
+            <input type="text" id="cidade" name="cidade" class="form-control">
+          </div>
+          <div class="col-md-2">
+            <label for="estado" class="form-label">Estado</label>
+            <input type="text" id="estado" name="estado" class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <!-- Botões -->
+      <div class="col-12 d-flex gap-2 mt-3">
+        <button type="submit" class="btn btn-success">Atualizar</button>
+        <button type="button" id="btnVoltar" class="btn btn-primary">Voltar</button>
+      </div>
+
+      <div class="col-12">
+        <div id="mensagem" class="text-danger mt-2"></div>
+      </div>
     </form>
   </main>
 
-  <footer>
+  <!-- Footer -->
+  <footer class="bg-light text-center p-3 mt-5">
     <p>© 2025 - Sistema de Usuários</p>
   </footer>
 
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/edicao.js"></script>
 </body>
 </html>

@@ -20,8 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  console.log("👤 Usuário logado:", user);
-
   userNameEl.textContent = `${user.nome_completo || user.email} (${user.perfil})`;
 
   logoutBtn.addEventListener("click", () => {
@@ -62,10 +60,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!resp.ok) throw new Error("Erro ao buscar usuários.");
       usuarios = await resp.json();
-      console.log("📦 Usuários carregados:", usuarios);
       renderTabela(usuarios);
     } catch (error) {
-      console.error("❌ Erro ao carregar usuários:", error);
+      console.error("Erro ao carregar usuários:", error);
       alert("Erro ao carregar usuários.");
     }
   }
@@ -93,15 +90,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (pagina.length === 0) {
-      tabelaBody.innerHTML = `<tr><td colspan="12" style="text-align:center;">Nenhum usuário encontrado</td></tr>`;
+      tabelaBody.innerHTML = `<tr><td colspan="12" class="text-center">Nenhum usuário encontrado</td></tr>`;
       pageInfo.textContent = isAdmin ? "Página 0 de 0" : "";
       return;
     }
 
-    console.log("🎨 Renderizando tabela. Admin:", isAdmin);
-
     for (const u of pagina) {
       const tr = document.createElement("tr");
+
       tr.innerHTML = `
         <td>${u.id}</td>
         <td>${u.nome_completo || ""}</td>
@@ -113,12 +109,19 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${u.endereco?.cidade || ""}</td>
         <td>${u.endereco?.estado || ""}</td>
         <td>${u.cunhado || ""}</td>
-        <td>${u.foto_url ? `<img src="${u.foto_url}" alt="foto" class="foto-thumb">` : "—"}</td>
         <td>
-          <button class="editarBtn" data-id="${u.id}">✏️ Editar</button>
-          ${isAdmin ? `<button class="excluirBtn" data-id="${u.id}">🗑️ Excluir</button>` : ""}
+          ${u.foto_url ? `<img src="${u.foto_url}" alt="foto" class="foto-thumb img-thumbnail">` : "—"}
+        </td>
+        <td class="d-flex gap-1">
+          <button class="btn btn-sm btn-success editarBtn" data-id="${u.id}">
+            <i class="bi bi-pencil-square"></i> Editar
+          </button>
+          ${isAdmin ? `<button class="btn btn-sm btn-danger excluirBtn" data-id="${u.id}">
+            <i class="bi bi-trash"></i> Excluir
+          </button>` : ""}
         </td>
       `;
+
       tabelaBody.appendChild(tr);
     }
 
@@ -127,12 +130,14 @@ document.addEventListener("DOMContentLoaded", () => {
       pageInfo.textContent = `Página ${paginaAtual} de ${totalPaginas}`;
     }
 
+    // Eventos Editar
     document.querySelectorAll(".editarBtn").forEach((btn) => {
       btn.addEventListener("click", () => {
         window.location.href = `edicao.html?id=${btn.dataset.id}`;
       });
     });
 
+    // Eventos Excluir
     document.querySelectorAll(".excluirBtn").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const id = parseInt(btn.dataset.id);
@@ -164,13 +169,21 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
+    // Modal de foto
     document.querySelectorAll(".foto-thumb").forEach((img) => {
       img.addEventListener("click", () => {
         const modal = document.createElement("div");
-        modal.className = "modal-foto";
-        const imgModal = document.createElement("img");
-        imgModal.src = img.src;
-        modal.appendChild(imgModal);
+        modal.className = "modal fade show";
+        modal.style.display = "block";
+        modal.innerHTML = `
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body p-0">
+                <img src="${img.src}" class="img-fluid" alt="Foto do usuário">
+              </div>
+            </div>
+          </div>
+        `;
         modal.addEventListener("click", () => modal.remove());
         document.body.appendChild(modal);
       });

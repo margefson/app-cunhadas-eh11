@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cep = cepInput.value.replace(/\D/g, "");
     if (!cep) return;
 
-    mostrarMensagem("Buscando endereço pelo CEP...", "sucesso");
+    //mostrarMensagem("Buscando endereço pelo CEP...", "sucesso");
 
     try {
       const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
       form.querySelector('input[name="bairro"]').value = data.bairro || "";
       form.querySelector('input[name="cidade"]').value = data.localidade || "";
       form.querySelector('input[name="estado"]').value = data.uf || "";
-      mostrarMensagem("Endereço preenchido automaticamente", "sucesso");
+      //mostrarMensagem("Endereço preenchido automaticamente", "sucesso");
     } catch (err) {
       mostrarMensagem("Erro ao buscar CEP: " + err.message);
     }
