@@ -9,16 +9,18 @@
     rel="stylesheet"
     crossorigin="anonymous"
   />
+    <!-- Estilos customizados -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Header -->
-  <header class="bg-primary text-white p-3 mb-4">
-    <div class="container d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center">
-        <img src="img/logo.jpg" alt="Logo" class="img-fluid me-2" style="max-height:60px;">
-        <h1 class="h4 mb-0">Cadastro de Usuário</h1>
-      </div>
-    </div>
+  <!-- Banner -->
+  <header class="text-center mb-3">
+    <picture>
+      <source media="(max-width: 480px)" srcset="img/banner-mobile-640x360.png">
+      <source media="(max-width: 1024px)" srcset="img/banner-tablet-1536x864.png">
+      <source media="(min-width: 1025px)" srcset="img/banner-desktop-2732x1366.png">
+      <img src="img/banner-desktop-2732x1366.png" alt="Banner Cunhadas" class="banner">
+    </picture>
   </header>
 
   <!-- Main -->
@@ -27,7 +29,7 @@
 
       <!-- Seção Dados Pessoais -->
       <div class="border rounded p-3 mb-4">
-        <h5 class="mb-3">Dados Pessoais</h5>
+        <h5 class="h5">Dados Pessoais</h5>
         <div class="row g-3">
           <div class="col-md-6">
             <label for="nome_completo" class="form-label">Nome Completo</label>
@@ -61,7 +63,7 @@
 
       <!-- Seção Endereço -->
       <div class="border rounded p-3 mb-4">
-        <h5 class="mb-3">Endereço</h5>
+        <h5 class="h5">Endereço</h5>
         <div class="row g-3">
           <div class="col-md-4">
             <label for="cep" class="form-label">CEP</label>
@@ -96,8 +98,8 @@
 
       <!-- Botões -->
       <div class="col-12 d-flex gap-2 mt-3">
-        <button type="submit" class="btn btn-success">Cadastrar</button>
-        <button type="button" id="btnVoltar" class="btn btn-primary">Voltar</button>
+        <button type="submit" class="btn btn-roxa w-100">Cadastrar</button>
+        <button type="button" id="btnVoltar" class="btn btn-rosa w-100">Voltar</button>
       </div>
 
       <div class="col-12">
@@ -106,9 +108,10 @@
     </form>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-light text-center p-3 mt-5">
-    <p>© 2025 - Sistema de Usuários</p>
+  <!-- Rodapé -->
+  <footer class="text-white text-center footer-gradient">
+    <img src="img/footer.png" alt="" class="footer-banner">
+    <p class="py-2 mb-0">© 2025 - Esperança & Harmonia Nº11 - Cunhadas</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
